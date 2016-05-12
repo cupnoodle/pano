@@ -5,13 +5,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"
 ></script>
 <script src="panorama.js"></script>
+<style>
+	body{
+		margin: 0;
+		padding: 0;
+	}
+
+	#view{
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   background-color:#000
+   top: 0;
+   left: 0;
+	}
+
+	.content {
+		width: 100%;
+		position: absolute;
+		color: #FFF;
+		padding-left: auto;
+		padding-right: auto;
+		margin-top: 20%;
+		text-align: center;
+		font-size: 40px;
+	}
+</style>
 </head>
 <body>
-<div>
+<div style="display:none;">
 panorama textures: 
 <select id="images"></select><a id="source" href="" target="_blank">source</a>
 </div>
 <div id="log"></div>
-<div id="view"></div>
+<div id="view">
+	<div class="content">
+		<span>
+		Hi Frank!
+		</span>
+	</div>
+</div>
 </body>
 </html>

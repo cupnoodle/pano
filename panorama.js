@@ -2,7 +2,12 @@
 window.addEventListener("load", function () {
     "use strict";
     
-    var w = 800, h = 800;
+    var browser_size = {
+        width: window.innerWidth || document.body.clientWidth,
+        height: window.innerHeight || document.body.clientHeight
+    }
+
+    var w = browser_size.width, h = browser_size.height;
     //[prepare screen]
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(w, h);
@@ -28,12 +33,19 @@ window.addEventListener("load", function () {
             new THREE.Euler(lat, lon, 0, "YXZ"));
         camera.quaternion.copy(rotm);
     };
+
+    // move background on mouse hover
+    //view.addEventListener("mousemove", gyroMouse, false);
+
+    // move background on mouse drag
+    
     view.addEventListener("mousedown", function (ev) {
         view.addEventListener("mousemove", gyroMouse, false);
     }, false);
     view.addEventListener("mouseup", function (ev) {
         view.removeEventListener("mousemove", gyroMouse, false);
     }, false);
+    
     
     // [camera rotation by direct gyro sensor angles on tablets]
     // see: http://mdn.io/Detecting_device_orientation
@@ -115,11 +127,12 @@ window.addEventListener("load", function () {
          src: "https://www.flickr.com/photos/linkahwai/4787682866"},
         {url: "tex-ruin.jpg",
          src: "https://www.flickr.com/photos/onecm/9503927685"},
-         */
+         
         {url: "tex-snow.jpg",
          src: "https://www.flickr.com/photos/alexschreyer/8457868515"},
         {url: "tex-susukino.jpg",
          src: "https://www.flickr.com/photos/vitroids/3903978334"},
+         */
         {url: "tex-underbridge.jpg",
          src: "https://www.flickr.com/photos/onecm/11610797676"},
     ];
