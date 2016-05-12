@@ -1,6 +1,8 @@
 //[sphere panorama control]
 window.addEventListener("load", function () {
     "use strict";
+
+    console.log("loaded");
     
     var browser_size = {
         width: window.innerWidth || document.body.clientWidth,
@@ -23,11 +25,51 @@ window.addEventListener("load", function () {
     // [camera rotation by mouse]
     var lon = 0;
     var lat = 0;
+
+    var onMouseDownMouseX = 0;
+    var onMouseDownMouseY = 0;
+
+    var isUserInteracting = false;
+
+    var onMouseDownLon = 0;
+    var onMouseDownLat = 0;
+
     var gyroMouse = function (ev) {
-        var mx = ev.movementX || ev.mozMovementX || ev.webkitMovementX || 0;
-        var my = ev.movementY || ev.mozMovementY || ev.webkitMovementY || 0;
+        console.log("gyro mouse function");
+        //safari fix
+        
+        /*
+        var lastMovedX = 0;
+        var lastMovedY = 0;
+
+        if (lastClientX === ev.clientX && lastClientY === ev.clientY) {
+            return;
+        }
+
+        if(ev.clientX && ev.clientY)
+        {   
+            if(lastClientX && lastClientY)
+            {
+                lastMovedX = ev.clientX - lastClientX;
+                lastMovedY = ev.clientY - lastClientY;
+            }
+
+            lastClientX = ev.clientX;
+            lastClientY = ev.clientY;
+        }
+        
+    
+        var mx = ev.movementX || ev.mozMovementX || ev.webkitMovementX || lastMovedX || 0;
+        var my = ev.movementY || ev.mozMovementY || ev.webkitMovementY || lastMovedY || 0;
         lat = Math.min(Math.max(-Math.PI / 2, lat - my * 0.01), Math.PI / 2);
         lon = lon - mx * 0.01;
+    */
+    
+        if ( isUserInteracting === true ) {
+            lon = ( onMouseDownMouseX - event.clientX ) * 0.01 + onMouseDownLon;
+            lat = ( event.clientY - onMouseDownMouseY ) * 0.01 + onMouseDownLat;
+        }
+
         
         var rotm = new THREE.Quaternion().setFromEuler(
             new THREE.Euler(lat, lon, 0, "YXZ"));
@@ -40,9 +82,18 @@ window.addEventListener("load", function () {
     // move background on mouse drag
     
     view.addEventListener("mousedown", function (ev) {
+        console.log("mousedown event");
+        isUserInteracting = true;
+        onMouseDownMouseX = event.clientX;
+        onMouseDownMouseY = event.clientY;
+        onMouseDownLon = lon;
+        onMouseDownLat = lat;
+
         view.addEventListener("mousemove", gyroMouse, false);
     }, false);
     view.addEventListener("mouseup", function (ev) {
+        console.log("mouseup event");
+        isUserInteracting = false;
         view.removeEventListener("mousemove", gyroMouse, false);
     }, false);
     
