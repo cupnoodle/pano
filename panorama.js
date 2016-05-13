@@ -1,5 +1,5 @@
 //[sphere panorama control]
-window.addEventListener("load", function () {
+$( document ).ready(function() {
     "use strict";
 
     console.log("loaded");
@@ -10,6 +10,7 @@ window.addEventListener("load", function () {
     }
 
     var w = browser_size.width, h = browser_size.height;
+
     //[prepare screen]
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(w, h);
@@ -33,6 +34,10 @@ window.addEventListener("load", function () {
 
     var onMouseDownLon = 0;
     var onMouseDownLat = 0;
+
+    var resizeCanvas = function (ev){
+        console.log("resizing");
+    };
 
     var gyroMouse = function (ev) {
         console.log("gyro mouse function");
@@ -69,8 +74,8 @@ window.addEventListener("load", function () {
         else
         {
             if ( isUserInteracting === true ) {
-                lon = ( onMouseDownMouseX - event.clientX ) * 0.01 + onMouseDownLon;
-                lat = ( event.clientY - onMouseDownMouseY ) * 0.01 + onMouseDownLat;
+                lon = ( onMouseDownMouseX - ev.clientX ) * 0.01 + onMouseDownLon;
+                lat = ( onMouseDownMouseY - ev.clientY ) * 0.01 + onMouseDownLat;
             }
         }
     
@@ -102,7 +107,8 @@ window.addEventListener("load", function () {
         view.removeEventListener("mousemove", gyroMouse, false);
     }, false);
     
-    
+    window.addEventListener("resize", resizeCanvas, false);
+
     // [camera rotation by direct gyro sensor angles on tablets]
     // see: http://mdn.io/Detecting_device_orientation
     // (work on android firefox and iOS Safari)
@@ -186,9 +192,9 @@ window.addEventListener("load", function () {
          
         {url: "tex-snow.jpg",
          src: "https://www.flickr.com/photos/alexschreyer/8457868515"},
+         */
         {url: "tex-susukino.jpg",
          src: "https://www.flickr.com/photos/vitroids/3903978334"},
-         */
         {url: "tex-underbridge.jpg",
          src: "https://www.flickr.com/photos/onecm/11610797676"},
     ];
@@ -221,4 +227,361 @@ window.addEventListener("load", function () {
         renderer.render(scene, camera);
     };
     loop();
-}, false);
+
+
+    //var waypointonw = $('#section-one').waypoint(function(direction) {
+    ////notify(this.element.id + ' hit') 
+    //console.log("section twooo");
+    //var replaceTexturee = function () {
+    //      //var texture = textures[select.selectedIndex];
+    //      //var source = document.getElementById("source").href = texture.src;
+    //      var img = document.createElement("img");
+    //      img.crossOrigin = "anonymous";
+    //      img.src = "tex-underbridge.jpg";
+    //      var tex = new THREE.Texture(img);
+    //      mat.map = tex;
+    //      img.addEventListener("load", function () {
+    //          tex.needsUpdate = true;
+    //          mat.map.needsUpdate = true; // important for replacing textures
+    //      }, false);
+    //  };
+    //  /*
+    //  textures.forEach(function (texture) {
+    //      var option = document.createElement("option");
+    //      option.innerHTML = texture.url;
+    //      select.appendChild(option);
+    //      option.selected = true;
+    //  });
+    //  select.addEventListener("change", replaceTexture, false);
+    //  */
+    //  replaceTexturee();
+    //  
+    //  //[play animation]
+    //  var loop = function loop() {
+    //      requestAnimationFrame(loop);
+    //      renderer.clear();
+    //      renderer.render(scene, camera);
+    //  };
+    //  loop();
+    //});
+    var way_default_offset = 'bottom-in-view';
+    
+
+    var waypointone = $('#section-one').waypoint(function(direction) {
+
+        if(direction === 'down')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-underbridge.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: '0'});
+
+    var waypointone_up = $('#section-one').waypoint(function(direction) {
+        if(direction === 'up')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-underbridge.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: 'bottom-in-view'});
+
+    
+    var waypointtwo = $('#section-two').waypoint(function(direction) {
+
+        if(direction === 'down')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-susukino.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: '0'});
+
+     var waypointtwo_up = $('#section-two').waypoint(function(direction) {
+        if(direction === 'up')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-susukino.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: 'bottom-in-view'});
+
+    var waypointthree = $('#section-three').waypoint(function(direction) {
+
+        if(direction === 'down')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-snow.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: '0'});
+
+     var waypointthree_up = $('#section-three').waypoint(function(direction) {
+        if(direction === 'up')
+        {
+          console.log("direction " + direction);
+  
+          //$('canvas').animate({
+          //  opacity: 0.0,
+          //}, 500, function() {
+            // Animation complete.
+            console.log("section twooo");
+            var replaceTexturee = function () {
+                  //var texture = textures[select.selectedIndex];
+                  //var source = document.getElementById("source").href = texture.src;
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = "tex-snow.jpg";
+                  var tex = new THREE.Texture(img);
+                  mat.map = tex;
+                  img.addEventListener("load", function () {
+                      tex.needsUpdate = true;
+                      mat.map.needsUpdate = true; // important for replacing textures
+                  }, false);
+              };
+              /*
+              textures.forEach(function (texture) {
+                  var option = document.createElement("option");
+                  option.innerHTML = texture.url;
+                  select.appendChild(option);
+                  option.selected = true;
+              });
+              select.addEventListener("change", replaceTexture, false);
+              */
+              replaceTexturee();
+              
+              //[play animation]
+              //var loop = function loop() {
+              //    requestAnimationFrame(loop);
+              //    renderer.clear();
+              //    renderer.render(scene, camera);
+              //};
+              //loop();
+          //});
+  
+          //$('canvas').animate({
+          //  opacity: 1.0,
+          //}, 500, function() {});
+        }
+    }, {offset: 'bottom-in-view'});
+
+
+});
+
+$(window).resize(function() {
+    var browser_size = {
+        width: window.innerWidth || document.body.clientWidth,
+        height: window.innerHeight || document.body.clientHeight
+    }
+
+    var w = browser_size.width, h = browser_size.height;
+
+    console.log('window was resized');
+    $('canvas').css("width", w);
+    $('canvas').css("height", h);
+});
+
+
+
+
+
